@@ -1,0 +1,381 @@
+
+100 Interview Questions
+Data Structures & Algorithms  |  Object-Oriented Programming
+Fresher Interview Preparation  •  TCS | Infosys | Accenture | Wipro | Cognizant
+May 2026  |  50 DSA Questions + 50 OOP Questions  |  Easy / Medium / Hard
+Section	Topics	Questions	Difficulty Split
+Part A: DSA	Arrays, Strings, LL, Stacks, Queues, Trees, Graphs, Sorting, Hashing, DP	50	14 Easy | 26 Medium | 10 Hard
+Part B: OOP	OOP Pillars, Classes & Memory, Interfaces, Design Patterns, Exceptions, Generics, Threads	50	17 Easy | 24 Medium | 9 Hard
+Total	12 Topics covering complete FSD Curriculum	100	31 Easy | 50 Medium | 19 Hard
+
+Easy — Freshers Must Know	Medium — Expected in Interviews	Hard — Bonus / Senior Level	Answer Hints provided for all 100 questions
+
+PART A: Data Structures & Algorithms  (Q01–Q50)
+
+50 questions covering Arrays, Strings, Linked Lists, Stacks, Queues, Trees, Graphs, Sorting, Hashing, and Dynamic Programming. Includes time and space complexity analysis.
+
+	Topic 1: Arrays & Strings  (Q01–Q12)
+
+Q01. What is an array? What are its time complexities for access, search, insert, and delete?
+ [Easy]   Arrays | Memory
+Answer: Array: contiguous memory, same data type. Access O(1), Search O(n), Insert O(n) (shift elements),    Delete O(n) (shift). Dynamic arrays (ArrayList) resize at O(n) amortized when capacity exceeded.
+Q02. How do you find the maximum and minimum element in an unsorted array in a single pass?
+ [Easy]   Arrays | Linear Scan
+Answer: Initialize max=min=arr[0]. Traverse once: if arr[i]>max → update max; if arr[i]<min → update min. Time: O(n), Space: O(1). Also achievable with 3n/2 comparisons using pairs (optimal).
+Q03. Explain the Two-Pointer technique. Solve: find a pair with a given sum in a sorted array.
+ [Easy]   Arrays | Two Pointers
+Answer: Two pointers: left=0, right=n-1. If arr[l]+arr[r]==target → found. If sum<target → l++. If sum>target → r--. Time O(n), Space O(1). Works only on sorted arrays. Brute force O(n²).
+Q04. What is the Sliding Window technique? Explain with an example.
+ [Medium]   Arrays | Sliding Window
+Answer: Maintains a window of size k over array. Subtract exiting element, add entering element. Example: Maximum sum of k consecutive elements — O(n) instead of O(n*k) brute force. Fixed/variable window variants.
+Q05. How do you rotate an array by k positions to the right?
+ [Medium]   Arrays | In-place
+Answer: Method 1: Reverse entire array, reverse first k elements, reverse remaining. O(n) time O(1) space. Method 2: Copy to temp array. k = k % n to handle k > n cases. Example: [1,2,3,4,5] k=2 → [4,5,1,2,3].
+Q06. Find all duplicates in an array of integers from 1 to n using O(1) extra space.
+ [Medium]   Arrays | Index Hashing
+Answer: Use array indices as hash map: for each element x, negate arr[|x|-1]. If it is already negative, x is duplicate. Time O(n), Space O(1). Restores original by taking absolute value.
+Q07. What is Kadane's Algorithm? How does it solve the maximum subarray sum problem?
+ [Medium]   Arrays | DP
+Answer: Track maxEndingHere (best sum ending at current) and maxSoFar (global max). maxEndingHere = max(arr[i], maxEndingHere + arr[i]). Update maxSoFar. Time O(n), Space O(1). Handles negative numbers correctly.
+Q08. How do you check if a string is a palindrome? Handle spaces and special characters.
+ [Easy]   Strings | Two Pointers
+Answer: Two pointers: i=0, j=len-1. Skip non-alphanumeric chars. Compare lowercase chars. If mismatch → not palindrome. Time O(n), Space O(1). Example: 'A man, a plan, a canal: Panama' → true.
+Q09. Explain how to find all anagrams of a pattern in a text string.
+ [Medium]   Strings | Sliding Window
+Answer: Use sliding window of size pattern.length + frequency map. Compare char counts using HashMap or int[26]. Slide window, update counts. Time O(n), Space O(1) since fixed alphabet size. LeetCode #438.
+Q10. How do you find the longest substring without repeating characters?
+ [Medium]   Strings | Sliding Window
+Answer: Sliding window with HashSet. Right pointer expands window; left pointer shrinks when duplicate found. Track max window size. Time O(n), Space O(min(n,m)) where m=charset size. LeetCode #3.
+Q11. What is string hashing? How is it used in the Rabin-Karp pattern matching algorithm?
+ [Hard]   Strings | Hashing
+Answer: Assign numeric value to each char, compute hash of pattern and window of same size. Compare hashes (O(1)). If match, verify char-by-char. Rolling hash recalculates in O(1) by removing old char, adding new. Avg O(n+m).
+Q12. How do you reverse words in a sentence without using split()? Example: 'hello world' → 'world hello'.
+ [Medium]   Strings | In-place
+Answer: 1. Reverse entire string. 2. Reverse each word individually (find spaces as delimiters). Time O(n), Space O(1) for in-place. With split(): split → reverse array → join. Easy O(n) approach acceptable in interviews.
+
+	Topic 2: Linked Lists  (Q13–Q20)
+
+Q13. What is a Linked List? Compare Singly, Doubly, and Circular variants.
+ [Easy]   Linked List | Basics
+Answer: Singly LL: node has data + next pointer. Doubly: data + next + prev (browser history, undo-redo). Circular: last node points to head (round-robin scheduling). Singly uses less memory; doubly allows backward traversal.
+Q14. How do you reverse a singly linked list? Provide both iterative and recursive solutions.
+ [Easy]   Linked List | Reversal
+Answer: Iterative: prev=null, curr=head. While curr: next=curr.next, curr.next=prev, prev=curr, curr=next. Return prev. O(n) time O(1) space. Recursive: reverse rest, head.next.next=head, head.next=null. O(n) time O(n) stack space.
+Q15. How do you detect a cycle in a linked list using Floyd's Cycle Detection algorithm?
+ [Medium]   Linked List | Floyd's
+Answer: Slow pointer moves 1 step, fast pointer moves 2 steps. If they meet → cycle exists. To find start: reset slow to head, move both 1 step until they meet — that is the cycle start. Time O(n), Space O(1).
+Q16. How do you find the middle of a linked list in one pass?
+ [Easy]   Linked List | Two Pointers
+Answer: Slow and fast pointer technique. Both start at head. Slow moves 1 step, fast moves 2 steps. When fast reaches end, slow is at middle. For even-length list, slow is at second middle. Time O(n), Space O(1).
+Q17. How do you merge two sorted linked lists into one sorted linked list?
+ [Easy]   Linked List | Merge
+Answer: Compare heads of both lists, pick smaller, recurse on rest. Iterative: use dummy head node, compare and append smaller node, advance that pointer. Time O(m+n), Space O(1) iterative, O(m+n) recursive stack.
+Q18. How do you remove the Nth node from the end of a linked list in one pass?
+ [Medium]   Linked List | Two Pointers
+Answer: Two pointers: fast and slow, both at head. Advance fast by n+1 steps. Then move both until fast is null. slow.next = slow.next.next. Use dummy head to handle edge case of removing first node. Time O(L), Space O(1).
+Q19. What is the difference between deep copy and shallow copy of a linked list? How do you deep copy a list with random pointers?
+ [Hard]   Linked List | Clone
+Answer: Shallow: copies references. Deep: copies actual nodes. For random-pointer clone: Method 1 (HashMap): map original→clone nodes, assign next/random using map. O(n) space. Method 2: Interweave original and cloned nodes. O(1) space.
+Q20. How do you check if a linked list is a palindrome?
+ [Medium]   Linked List | Palindrome
+Answer: Find middle (slow-fast). Reverse second half. Compare first half with reversed second half node by node. If all match → palindrome. Restore original list (reverse again). Time O(n), Space O(1).
+
+	Topic 3: Stacks & Queues  (Q21–Q28)
+
+Q21. Implement a stack that supports push, pop, peek, and getMin() in O(1) time.
+ [Medium]   Stack | Design
+Answer: Use auxiliary min-stack. On push(x): push x to main stack; push min(x, minStack.top()) to min-stack. On pop: pop both. getMin(): return minStack.top(). No extra comparison needed since min-stack always tracks current minimum.
+Q22. How do you check for balanced parentheses using a stack?
+ [Easy]   Stack | Applications
+Answer: Traverse string. If opening bracket → push to stack. If closing bracket → check if stack top is matching opening; if yes pop, else return false. After traversal, stack should be empty. Time O(n), Space O(n).
+Q23. How do you evaluate a postfix expression (Reverse Polish Notation) using a stack?
+ [Medium]   Stack | Expression
+Answer: Scan tokens left to right. If number → push. If operator (+,-,*,/) → pop two operands (b=pop, a=pop), apply operator, push result. Final stack top = result. Example: '2 3 + 4 *' → (2+3)*4 = 20.
+Q24. What is the Next Greater Element problem? Solve it using a stack.
+ [Medium]   Stack | Monotonic
+Answer: For each element, find next greater element to its right. Use monotonic stack: traverse right to left, maintain decreasing stack. For each element, pop until stack top > current. Stack top = NGE (or -1 if empty). Push current. O(n).
+Q25. How do you implement a Queue using two Stacks?
+ [Medium]   Queue | Design
+Answer: Stack1 for enqueue, Stack2 for dequeue. Enqueue: push to S1 O(1). Dequeue: if S2 empty, pour all S1 → S2 (reverses order), pop from S2. Amortized O(1) dequeue. Each element crosses between stacks at most once.
+Q26. What is a Circular Queue? How does it fix the limitation of a simple queue?
+ [Medium]   Queue | Circular
+Answer: Simple array queue: front advances leaving wasted space. Circular queue: front and rear wrap around using modulo (rear = (rear+1) % size). Full when (rear+1)%size == front. Utilizes all array slots. Used in OS scheduling.
+Q27. What is a Deque (Double-Ended Queue)? Give two real-world use cases.
+ [Medium]   Queue | Deque
+Answer: Deque: insert/delete at both front and rear, all O(1). Use cases: 1) Sliding window maximum (monotonic deque). 2) Palindrome checking (compare front and rear). Java: ArrayDeque. Python: collections.deque.
+Q28. Explain the Largest Rectangle in Histogram problem and its stack-based solution.
+ [Hard]   Stack | Monotonic
+Answer: For each bar, find leftmost and rightmost boundary where bar can extend (nearest smaller bar on each side). Monotonic stack: maintain increasing stack. When a bar is smaller than top, top's boundary is found. Pop and compute area. O(n).
+
+	Topic 4: Trees & Graphs  (Q29–Q38)
+
+Q29. What is a Binary Tree? Explain Inorder, Preorder, and Postorder traversal with examples.
+ [Easy]   Trees | Traversal
+Answer: Inorder (L-Root-R): sorted output for BST. Preorder (Root-L-R): copy tree, prefix expression. Postorder (L-R-Root): delete tree, postfix expression. All three: O(n) time, O(h) space (h=height). Iterative uses explicit stack.
+Q30. What is a Binary Search Tree (BST)? What are its time complexities for search, insert, delete?
+ [Easy]   Trees | BST
+Answer: BST: left subtree < root < right subtree. Avg: O(log n) for search/insert/delete. Worst (skewed): O(n). Balanced BST (AVL, Red-Black) guarantees O(log n). In-order traversal gives sorted sequence.
+Q31. What is the height/depth of a binary tree? How do you find it recursively?
+ [Easy]   Trees | Height
+Answer: Height = longest path from root to leaf. Recursive: height(null)=0; height(node) = 1 + max(height(left), height(right)). Time O(n), Space O(h). Balanced tree height = O(log n); skewed = O(n).
+Q32. How do you perform Level Order (BFS) traversal of a binary tree?
+ [Easy]   Trees | BFS
+Answer: Use a Queue. Enqueue root. While queue not empty: dequeue node, process it, enqueue its left and right children. Results in level-by-level traversal. Time O(n), Space O(w) where w=max width. Used for zigzag, right view problems.
+Q33. What is a balanced binary tree? How do you check if a tree is balanced?
+ [Medium]   Trees | Balance
+Answer: Balanced: for every node, |height(left) - height(right)| <= 1. Check: DFS returning height. If any subtree unbalanced, return -1 (sentinel). If both children return -1 or differ by >1 → unbalanced. O(n) time, O(h) space.
+Q34. How do you find the Lowest Common Ancestor (LCA) of two nodes in a binary tree?
+ [Medium]   Trees | LCA
+Answer: Recursive: if root==null or root==p or root==q → return root. Search left and right. If both return non-null → root is LCA. If only one side → return that side. Time O(n). For BST: compare values to go left/right.
+Q35. What is Graph representation? Compare Adjacency Matrix vs Adjacency List.
+ [Easy]   Graphs | Representation
+Answer: Matrix: V×V array, O(1) edge check, O(V²) space. List: array of lists, O(V+E) space, O(degree) edge check. Use matrix for dense graphs, list for sparse graphs. Most real-world graphs are sparse → adjacency list preferred.
+Q36. Explain Depth First Search (DFS) and Breadth First Search (BFS) with their applications.
+ [Medium]   Graphs | Traversal
+Answer: DFS: recursive/stack, explores as deep as possible. Use: cycle detection, topological sort, connected components, maze solving. BFS: queue, explores level by level. Use: shortest path in unweighted graph, level order traversal, bipartite check.
+Q37. How do you detect a cycle in a directed graph?
+ [Medium]   Graphs | Cycle Detection
+Answer: DFS with two boolean arrays: visited[] and inStack[] (current DFS path). If a node already in inStack is revisited → cycle. Time O(V+E), Space O(V). Alternative: Kahn's Algorithm (topological sort) — if not all nodes processed → cycle exists.
+Q38. What is Topological Sorting? How is it applied in real projects?
+ [Medium]   Graphs | Topo Sort
+Answer: Linear ordering of vertices in DAG where for every edge u→v, u comes before v. Algorithms: DFS (reverse finish order) or Kahn's BFS (reduce in-degree). Real uses: build systems (Makefile, Maven), course prerequisites, task scheduling.
+
+	Topic 5: Sorting, Searching & Hashing  (Q39–Q46)
+
+Q39. Compare Bubble, Selection, and Insertion Sort. When is Insertion Sort preferred?
+ [Easy]   Sorting | Comparison
+Answer: Bubble: O(n²) all cases, adaptive. Selection: O(n²), O(n) swaps. Insertion: O(n²) worst, O(n) best (nearly sorted). Insertion Sort preferred for small arrays (< 20 elements), nearly sorted input, and as base case in TimSort/Hybrid sorts.
+Q40. Explain Merge Sort. Why is it preferred over Quick Sort for linked lists?
+ [Medium]   Sorting | Merge Sort
+Answer: Merge Sort: Divide array in half, sort each, merge. T(n)=2T(n/2)+O(n) → O(n log n) all cases, Stable. Preferred for linked lists: no random access needed (merge is sequential), and extra O(n) space doesn't matter for LL.
+Q41. Explain Quick Sort. What is the worst case and how do you avoid it?
+ [Medium]   Sorting | Quick Sort
+Answer: Pick pivot, partition array (elements < pivot left, > pivot right), recurse. Avg O(n log n). Worst O(n²) when pivot is always min/max (sorted array with first element pivot). Avoid: random pivot, median-of-3, or 3-way partitioning (Dutch National Flag).
+Q42. What is Counting Sort? When can you use it and what are its limitations?
+ [Medium]   Sorting | Non-Comparison
+Answer: Count frequency of each element in range [0..k]. Compute prefix sums. Place elements in output array using prefix. Time O(n+k), Space O(k). Only works for integers with small range k. Not suitable for floats, strings, or large ranges.
+Q43. How does Binary Search work? What are its preconditions and variants?
+ [Easy]   Searching | Binary Search
+Answer: Precondition: sorted array. Compare mid with target. If equal → found. If target < mid → search left half. Else right half. O(log n). Variants: find first/last occurrence (adjust condition), search in rotated array, search in 2D matrix.
+Q44. How do you search in a rotated sorted array?
+ [Medium]   Searching | Binary Search
+Answer: Modified binary search: find mid. Check which half is sorted (compare arr[low] and arr[mid]). If left sorted and target in [arr[low], arr[mid]] → go left, else right. Similarly for right sorted. O(log n). LeetCode #33.
+Q45. How does a HashMap work internally? Explain collision resolution.
+ [Medium]   Hashing | Internals
+Answer: Array of buckets indexed by hash(key) % capacity. Collision: Chaining (linked list/tree at bucket) or Open Addressing (linear probe, quadratic probe, double hashing). Java HashMap uses chaining; switches to Red-Black Tree at bucket size 8. Load factor 0.75.
+Q46. How do you find the first non-repeating character in a string using Hashing?
+ [Easy]   Hashing | Applications
+Answer: Pass 1: count frequency of each char in LinkedHashMap (preserves order). Pass 2: return first char with frequency 1. Time O(n), Space O(1) (at most 26 chars). Alternative: int[26] array for lowercase letters only.
+
+	Topic 6: Recursion & Dynamic Programming  (Q47–Q50)
+
+Q47. What is Dynamic Programming? Explain the difference between Top-Down (Memoization) and Bottom-Up (Tabulation).
+ [Medium]   DP | Concept
+Answer: DP: solve overlapping subproblems, store results. Top-Down: recursive + cache (HashMap/array). Bottom-Up: iterative, build table from base cases. Top-down easier to code, bottom-up avoids stack overflow. Both O(n) for Fibonacci vs O(2^n) naive.
+Q48. Solve the 0/1 Knapsack problem using Dynamic Programming. State the recurrence relation.
+ [Hard]   DP | Knapsack
+Answer: dp[i][w] = max value using first i items with capacity w. If weight[i] > w: dp[i][w]=dp[i-1][w]. Else: max(dp[i-1][w], val[i]+dp[i-1][w-wt[i]]). Time O(n*W), Space O(n*W), optimizable to O(W) with 1D array.
+Q49. What is the Longest Common Subsequence (LCS) problem? State the recurrence.
+ [Hard]   DP | Strings
+Answer: LCS: longest subsequence common to both strings (not necessarily contiguous). dp[i][j]: LCS of s1[0..i-1] and s2[0..j-1]. If s1[i-1]==s2[j-1]: dp[i][j]=dp[i-1][j-1]+1. Else: max(dp[i-1][j], dp[i][j-1]). O(m*n) time and space.
+Q50. Explain the Coin Change problem. How do you find the minimum coins needed to make a sum?
+ [Medium]   DP | Unbounded
+Answer: dp[amount] = min coins. dp[0]=0, dp[i]=INF initially. For each coin c: dp[i] = min(dp[i], dp[i-c]+1) if i>=c. Time O(amount*coins), Space O(amount). Greedy does NOT always work (e.g., coins [1,3,4], sum 6: greedy gives 3, DP gives 2).
+
+PART B: Object-Oriented Programming  (Q51–Q100)
+
+50 questions covering all OOP pillars, Java keywords, design patterns, exception handling, generics, collections, streams, and multithreading. Focused on fresher to mid-level interview depth.
+
+	Topic 7: OOP Fundamentals  (Q51–Q62)
+
+Q51. What are the four pillars of OOP? Briefly explain each with a real-world analogy.
+ [Easy]   OOP | Pillars
+Answer: Encapsulation: Capsule — hides implementation, exposes API (private fields + getters/setters). Inheritance: Parent-Child — reuse code (Car extends Vehicle). Polymorphism: Same interface, different behavior (Animal.speak() for Dog/Cat). Abstraction: Remote control — use without knowing internals.
+Q52. What is Encapsulation? Why is it important? How is it achieved in Java?
+ [Easy]   OOP | Encapsulation
+Answer: Encapsulation: bundling data (fields) and methods that operate on data, restricting direct access. Importance: data hiding, controlled access, validation in setters, maintainability. Achieved with: private fields + public getters/setters. JavaBeans convention.
+Q53. Explain Inheritance in Java. What is the difference between `extends` and `implements`?
+ [Easy]   OOP | Inheritance
+Answer: Inheritance: subclass inherits fields/methods of superclass. extends: class→class (single inheritance only in Java). implements: class→interface (multiple allowed). A class can extend one class AND implement multiple interfaces simultaneously.
+Q54. What is Polymorphism? Explain compile-time vs runtime polymorphism with Java examples.
+ [Easy]   OOP | Polymorphism
+Answer: Compile-time (Static): Method Overloading — same name, different params, resolved at compile time. Runtime (Dynamic): Method Overriding — subclass overrides parent method, resolved via virtual dispatch at runtime. add(int,int) vs Dog.speak() overriding Animal.speak().
+Q55. What is Abstraction? What is the difference between abstract class and interface in Java 8+?
+ [Medium]   OOP | Abstraction
+Answer: Abstraction: hide implementation, expose behavior. Abstract class: can have constructors, instance vars, concrete methods, abstract methods. Interface: default/static methods (Java 8+), no constructors, no instance state. A class can implement multiple interfaces but extend only one class.
+Q56. What is a constructor? Explain constructor overloading and constructor chaining.
+ [Easy]   OOP | Constructors
+Answer: Constructor: special method that initializes an object, called automatically at object creation, has no return type. Overloading: multiple constructors with different params. Chaining: this() calls sibling constructor; super() calls parent constructor — must be first statement.
+Q57. What is the `this` keyword in Java? When and why is it used?
+ [Easy]   OOP | Keywords
+Answer: this: reference to current object. Uses: 1) Distinguish instance var from param (this.name = name). 2) Call another constructor (this()). 3) Pass current object as argument. 4) Return current object (builder pattern). Cannot be used in static context.
+Q58. What is the `super` keyword? When must you explicitly call `super()`?
+ [Easy]   OOP | Keywords
+Answer: super: reference to parent class. super(): call parent constructor (called implicitly if parent has no-arg constructor; must be explicit if parent has only parameterized constructor). super.method(): call overridden parent method. super.field: access hidden parent field.
+Q59. Explain the `static` keyword. Can static methods access instance variables? Why or why not?
+ [Easy]   OOP | Static
+Answer: Static: belongs to class, not instances. Loaded when class loads. Static methods CANNOT access instance variables directly — instance vars require an object, but static context has no `this`. Static can access other static members. Create object inside static method to access instance vars.
+Q60. What is the `final` keyword? Explain final variable, final method, and final class.
+ [Easy]   OOP | Final
+Answer: Final variable: constant, must be initialized at declaration or in constructor (blank final). Final method: cannot be overridden by subclass. Final class: cannot be subclassed (String, Integer, Math are final). Final + static = class-level constant (PI = 3.14).
+Q61. What is method overriding? What are the rules that must be followed?
+ [Medium]   OOP | Overriding
+Answer: Subclass redefines superclass method with same name, params, and return type. Rules: 1) Same method signature. 2) Return type same or covariant. 3) Access modifier same or less restrictive. 4) Cannot throw new/broader checked exceptions. 5) @Override annotation recommended. Static methods cannot be overridden (hidden instead).
+Q62. What is method overloading? Can overloading be done by changing only return type?
+ [Easy]   OOP | Overloading
+Answer: Overloading: same method name, different parameters (number, type, or order). Resolved at compile time. NO — changing only return type does NOT constitute overloading and causes compile error. Autoboxing/varargs can cause ambiguous overloading warnings.
+
+	Topic 8: Classes, Objects & Memory  (Q63–Q70)
+
+Q63. What is the difference between a class and an object in Java?
+ [Easy]   OOP | Class vs Object
+Answer: Class: blueprint/template defined at compile time, no memory for fields. Object: runtime instance of class, allocated on heap. One class → many objects. class Car { } is a blueprint. Car myCar = new Car() creates an object. new keyword allocates heap memory.
+Q64. How does Java allocate memory for objects? Explain Stack vs Heap memory.
+ [Medium]   OOP | Memory
+Answer: Stack: method call frames, local variables, references (pointers). LIFO, auto-managed. Heap: actual objects, instance variables, arrays. Managed by Garbage Collector. Local reference (Car c) stored in stack; object data in heap. Primitives in stack (unless instance vars).
+Q65. What is Garbage Collection in Java? What makes an object eligible for GC?
+ [Medium]   OOP | GC
+Answer: GC: automatic reclamation of unreachable heap objects. Object eligible when: no references point to it (all refs null/out-of-scope), or in island of isolation (objects reference each other but none from outside). System.gc() is only a suggestion. finalize() called before destruction.
+Q66. What is an inner class in Java? Explain static nested class vs non-static inner class.
+ [Medium]   OOP | Inner Classes
+Answer: Inner class: class defined inside another class. Non-static inner class: has access to outer instance members, requires outer object to instantiate. Static nested class: no access to outer instance, instantiated independently (OuterClass.Inner obj = new OuterClass.Inner()). Also: anonymous and local classes.
+Q67. What is the Singleton Design Pattern? Implement thread-safe Singleton in Java.
+ [Medium]   OOP | Design Pattern
+Answer: Singleton: ensures only one instance. Thread-safe: private static volatile instance; private constructor; static synchronized getInstance() with double-checked locking: if(instance==null){ synchronized(Singleton.class){ if(instance==null) instance=new Singleton(); } } return instance; Or use enum.
+Q68. What is the difference between shallow copy and deep copy of an object?
+ [Medium]   OOP | Copy
+Answer: Shallow copy: copies object, new reference, but nested objects still shared (Cloneable default). Deep copy: copies object and all nested objects recursively (new references for nested). Implement deep copy: override clone() recursively, or serialize/deserialize, or copy constructor.
+Q69. What is immutability? How do you create an immutable class in Java?
+ [Medium]   OOP | Immutability
+Answer: Immutable: object state cannot change after construction. Rules: 1) Declare class final. 2) All fields private final. 3) No setters. 4) Deep copy mutable fields in constructor and getters. Examples: String, Integer, LocalDate. Benefits: thread-safe, cacheable, hashCode stable.
+Q70. Explain the Object class methods: equals(), hashCode(), toString(). What is the contract between equals and hashCode?
+ [Medium]   OOP | Object Methods
+Answer: toString(): string representation. equals(): logical equality (default: reference). hashCode(): integer for hash-based collections. Contract: if a.equals(b) then a.hashCode()==b.hashCode(). Reverse not required. Violating: objects won't be found in HashMap/HashSet. Always override both together.
+
+	Topic 9: Interfaces, Abstract Classes & Design Patterns  (Q71–Q80)
+
+Q71. Can an interface have a constructor? Can it have instance variables?
+ [Easy]   OOP | Interfaces
+Answer: No constructor in interface (no object can be created from interface). Variables in interface are implicitly public static final (constants). Cannot have instance variables. Java 8: default methods (concrete). Java 9: private methods. Java 11: fully private instance-like logic via default.
+Q72. What is a functional interface? How is it used with lambda expressions in Java?
+ [Medium]   OOP | Functional
+Answer: Functional interface: exactly one abstract method. @FunctionalInterface annotation. Examples: Runnable, Comparator, Predicate, Function, Consumer, Supplier. Lambda: (params) -> body. Comparator<Integer> comp = (a, b) -> a - b; replaces anonymous class verbosity.
+Q73. What is the Liskov Substitution Principle (LSP)? Give an example of a violation.
+ [Hard]   OOP | SOLID
+Answer: LSP: Objects of subclass must be substitutable for superclass without breaking program. Violation: Rectangle class with setWidth/setHeight; Square extends Rectangle and overrides both — Square.setWidth(5) also sets height, breaking Rectangle's behavior. Solution: don't inherit from Rectangle; use separate hierarchy.
+Q74. Explain SOLID principles. Which principle does dependency injection support?
+ [Medium]   OOP | SOLID
+Answer: S: Single Responsibility. O: Open-Closed (open for extension, closed for modification). L: Liskov Substitution. I: Interface Segregation (no client should depend on methods it doesn't use). D: Dependency Inversion (depend on abstractions, not concretions). DI supports the D principle.
+Q75. What is the Factory Design Pattern? Implement a simple example.
+ [Medium]   OOP | Design Pattern
+Answer: Factory: creates objects without exposing creation logic. ShapeFactory.createShape('circle') returns new Circle(). Client codes to interface (Shape), not concrete class. Hides constructor. Variants: Simple Factory, Factory Method (subclass decides), Abstract Factory (family of products).
+Q76. What is the Builder Design Pattern? When is it preferred over telescoping constructors?
+ [Medium]   OOP | Design Pattern
+Answer: Builder: step-by-step construction of complex objects. Preferred when: constructor has many parameters (telescoping), optional parameters are numerous. Pizza.builder().size('large').cheese(true).pepperoni(false).build(). Lombok @Builder annotation generates this automatically.
+Q77. What is the Observer Design Pattern? Give a real-world example.
+ [Medium]   OOP | Design Pattern
+Answer: Observer: one-to-many dependency. When subject changes, all observers notified automatically. Real world: Event listeners (Button.addActionListener()), pub-sub messaging, stock price alerts, UI data binding (MVC). Subject has attach(), detach(), notify(). Observers implement update().
+Q78. What is the Strategy Design Pattern? How is it different from Template Method?
+ [Hard]   OOP | Design Pattern
+Answer: Strategy: defines family of algorithms, encapsulates each, makes them interchangeable. SortContext(SortStrategy strategy) — strategy can be BubbleSort or MergeSort at runtime. Template Method: defines skeleton in base class, subclasses override specific steps. Strategy uses composition; Template uses inheritance.
+Q79. What is the Decorator Design Pattern? How is it different from Inheritance?
+ [Hard]   OOP | Design Pattern
+Answer: Decorator: adds behavior to objects dynamically without altering class. Wraps object: CoffeeWithMilk(CoffeeWithSugar(SimpleCoffee())). Inheritance: adds at compile time, static, affects all instances. Decorator: runtime, flexible, composable. Java I/O streams are classic example: BufferedReader(FileReader('file')).
+Q80. What is the Proxy Design Pattern? Name its three types.
+ [Hard]   OOP | Design Pattern
+Answer: Proxy: surrogate that controls access to real object. Types: 1) Virtual Proxy: delays expensive object creation (lazy init). 2) Protection Proxy: access control based on permissions. 3) Remote Proxy: represents object in another JVM/network. Spring AOP uses proxy pattern for @Transactional, @Cacheable.
+
+	Topic 10: Exception Handling & Java Advanced OOP  (Q81–Q90)
+
+Q81. What is the exception hierarchy in Java? Explain Throwable, Error, Exception.
+ [Easy]   OOP | Exceptions
+Answer: Throwable (root) → Error (JVM errors, OutOfMemoryError, StackOverflowError — do not catch) and Exception (application errors). Exception → Checked (IOException, SQLException — must handle) and RuntimeException (Unchecked — NullPointerException, IllegalArgumentException).
+Q82. What is the difference between `throw` and `throws` in Java?
+ [Easy]   OOP | Exceptions
+Answer: throw: actually throws an exception object at runtime (throw new IllegalArgumentException('negative')). throws: declares that a method might throw a checked exception — callers must handle. void readFile() throws IOException { }. throw inside method body; throws in method signature.
+Q83. What is try-with-resources? How does it improve over finally for resource management?
+ [Medium]   OOP | Exceptions
+Answer: Try-with-resources (Java 7+): resource declared in try() — automatically closed after block, even if exception thrown. Resource must implement AutoCloseable. Avoids forgetting close() in finally, handles exceptions during close() correctly (suppressed exceptions). Cleaner code.
+Q84. Can a finally block prevent an exception from propagating? What if finally has a return statement?
+ [Hard]   OOP | Exceptions
+Answer: Finally CANNOT prevent propagation in general (exception still propagates after finally executes). BUT: if finally contains a return statement — it overrides any exception or return from try/catch. This is a bad practice that swallows exceptions silently. Avoid return in finally.
+Q85. How do you create a custom exception in Java? When should you use checked vs unchecked custom exceptions?
+ [Medium]   OOP | Exceptions
+Answer: Checked: class InsufficientFundsException extends Exception { public InsufficientFundsException(String msg){ super(msg); } }. Unchecked: extend RuntimeException. Use checked when caller should handle it (business rule). Use unchecked for programming errors that shouldn't occur (bad input validation).
+Q86. What are generics in Java? What is type erasure?
+ [Medium]   OOP | Generics
+Answer: Generics: compile-time type safety — List<String> instead of List. Prevents ClassCastException at runtime. Type Erasure: compiler removes generic type info, replaces with Object (or bound) — so List<String> and List<Integer> are same class at runtime. No new T(), no instanceof T, no T[] arr.
+Q87. What is the difference between `Comparable` and `Comparator` in Java?
+ [Medium]   OOP | Generics
+Answer: Comparable: natural ordering, implement in class itself (compareTo). Only one ordering. Comparator: external, separate class/lambda, multiple orderings possible. TreeSet(Comparator) or Collections.sort(list, comparator). String implements Comparable (alphabetical). Custom comparators for salary, age, name.
+Q88. What is the Java Collections hierarchy? What is the difference between Collection and Collections?
+ [Easy]   OOP | Collections
+Answer: Collection: root interface (List, Set, Queue extend it). Map does NOT extend Collection. Collections: utility class with static methods — sort(), shuffle(), min(), max(), synchronizedList(), unmodifiableList(). Collection is interface; Collections is a class. Arrays is similar for arrays.
+Q89. What are Java Streams? Explain intermediate vs terminal operations.
+ [Medium]   OOP | Streams
+Answer: Streams (Java 8+): functional-style pipeline for processing collections. Intermediate (lazy): filter(), map(), sorted(), distinct() — return stream, not executed until terminal. Terminal (eager): collect(), forEach(), count(), reduce(), findFirst() — triggers pipeline. Stream is consumed once.
+Q90. What is Optional in Java? How does it help avoid NullPointerException?
+ [Medium]   OOP | Optional
+Answer: Optional<T>: container that may or may not contain a non-null value. Methods: Optional.of(val), Optional.empty(), Optional.ofNullable(val). Use: isPresent(), get(), orElse(default), orElseGet(supplier), orElseThrow(), map(), filter(). Forces explicit null handling instead of silent NPE.
+
+	Topic 11: Multithreading & Concurrency OOP  (Q91–Q96)
+
+Q91. What is a Thread in Java? What are the two ways to create a thread?
+ [Easy]   OOP | Threads
+Answer: Thread: independent path of execution. 1) Extend Thread class: class MyThread extends Thread { void run() { } }. new MyThread().start(). 2) Implement Runnable: class Task implements Runnable { void run() {} }. new Thread(new Task()).start(). Prefer Runnable (allows extending other class).
+Q92. What is synchronization in Java? What is a race condition?
+ [Medium]   OOP | Threads
+Answer: Race condition: multiple threads access shared data simultaneously, outcome depends on thread scheduling. Synchronization: only one thread can execute synchronized block/method at a time (uses intrinsic lock/monitor). synchronized(this) or synchronized method. Prevents data inconsistency but reduces parallelism.
+Q93. What is the difference between `wait()`, `notify()`, and `sleep()` in Java threading?
+ [Medium]   OOP | Threads
+Answer: sleep(): pauses current thread for time, does NOT release lock, InterruptedException. wait(): pauses thread AND releases object lock, must be in synchronized block, wakes on notify()/notifyAll(). notify(): wakes one waiting thread on that object's monitor. sleep() is Thread method; wait() is Object method.
+Q94. What is a deadlock? How do you detect and prevent it?
+ [Hard]   OOP | Threads
+Answer: Deadlock: Thread A holds lock1, waits for lock2. Thread B holds lock2, waits for lock1. Neither can proceed. Prevention: 1) Always acquire locks in same order. 2) Use tryLock() with timeout. 3) Avoid nested locks. Detection: thread dump (jstack), JConsole. Java 1.5+: lock ordering is standard fix.
+Q95. What is the `volatile` keyword in Java? How does it differ from `synchronized`?
+ [Hard]   OOP | Threads
+Answer: volatile: guarantees visibility — writes to volatile variable are immediately visible to all threads (no CPU cache). Does NOT guarantee atomicity (volatile int i; i++ is not atomic — still race condition). synchronized: guarantees both visibility AND atomicity. volatile lighter, no locking overhead.
+Q96. What is the Executor Framework in Java? How is it better than raw Thread creation?
+ [Medium]   OOP | Threads
+Answer: ExecutorService manages thread pool — reuses threads, avoids creation overhead for each task. ThreadPoolExecutor, Executors.newFixedThreadPool(n), newCachedThreadPool(). Submit Callable (returns Future) or Runnable. Cleaner lifecycle management. shutdown() to stop accepting, awaitTermination() to wait.
+
+	Topic 12: Advanced OOP & Interview Specials  (Q97–Q100)
+
+Q97. What is the difference between Association, Aggregation, and Composition in OOP?
+ [Medium]   OOP | Relationships
+Answer: Association: general 'uses-a' (Teacher-Student). Aggregation: 'has-a', parts can exist independently (University has Departments — Department exists without University). Composition: strong 'has-a', parts cannot exist without whole (House has Rooms — Room has no meaning without House). Composition is strongest coupling.
+Q98. What is Coupling and Cohesion? What are the ideal values for good OOP design?
+ [Medium]   OOP | Design
+Answer: Coupling: degree of dependency between classes. Cohesion: how focused a class is on one responsibility. Ideal: Low Coupling (changes in one class don't ripple to others — use interfaces) + High Cohesion (each class does one thing well — Single Responsibility). Most OOP principles target this balance.
+Q99. What is the difference between Runtime Polymorphism and Duck Typing?
+ [Hard]   OOP | Polymorphism
+Answer: Runtime Polymorphism (Java): based on class hierarchy — Dog and Cat must extend Animal to be used as Animal reference. Duck Typing (Python/JS): if object has the required methods, it can be used regardless of class — 'if it walks like a duck and quacks like a duck, it's a duck'. Java uses structural typing via interfaces.
+Q100. Given a design problem: Model an online Library Management System using OOP principles. Identify classes, relationships, and apply at least 2 design patterns.
+ [Hard]   OOP | System Design
+Answer: Classes: Book, User, Librarian, Library, Loan, Catalog. Relationships: Library has-many Books (composition), User borrows Book (association). Patterns: 1) Singleton for Library (single instance). 2) Observer for overdue notifications. 3) Strategy for different search algorithms. 4) Factory for different book types (eBook, PhysicalBook).
+
+Quick Revision Tips Before Your Interview
+
+•	DSA: Always state time and space complexity after your solution — interviewers expect it.
+•	OOP: For every design pattern question, name the pattern, draw its class diagram in words, give a real code/project example.
+•	When stuck in coding round: think aloud, clarify constraints, give brute force first, then optimize.
+•	Revise: HashMap internals, equals/hashCode contract, and SOLID principles — asked at all three companies.
+•	Practice: Solve at least 2 LeetCode Easy + 1 Medium problem every day for 4 weeks before interviews.
+•	For TCS/Infosys written test: focus on Q01-Q28 (Arrays, LL, Stack, Queue, Sorting) and Q51-Q70 (OOP basics).
+•	For Accenture: additionally prepare Q81-Q100 (Design Patterns, Threads, Advanced OOP) and Q39-Q50 (DP).
+
+Best of luck with your interviews! You have got this.
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,55 @@
+Q01. What is an array? What are its time complexities for access, search, insert, and delete?
+
+
+Ans- An array is a data structure that stores elements of the same data type in contiguous memory locations.
+     
+    Example- int[] arr = {10, 20, 30, 40};
+       - All elements are integer
+       - Memory is allocated continuously
+       - Each element can be accessed usingg in index.
+       - Elements are stored one after another in memory.
+       - Indexing usually starts from 0.
+
+    Time Complexities for access, seaarch, insert and delete:-
+    
+    1. Access - O(1)       
+              - Access means retrieving an element using its index.
+              - Array elements are accessed directly using index.
+              - Directly index access.
+              - The address is calculated instantly.
+        Example- arr[3]- In that array uses direct memory addressing. So the array directly jumps to the location or target.
+                       - Here no need traversal is needed.
+              
+            
+    
+    2. Search - O(n)
+              - Searching means finding whether an element exists in the array.
+              - To find an element, we may need to traverse the whole array.          
+        Example - 30 - We need to traverse all elements in array. We may need to check every element one by one.     
+                     - In worst case element is at the end or not present.
+           
+            int[] arr = {10, 20, 30, 40};
+
+                int target = 30;
+                for(int i = 0; i < arr.length; i++) {
+                   if(arr[i] == target) {
+                     System.out.println("Found");
+                    }
+                 }
+
+    3. Insertion - O(n)        
+                 - Insertion means adding an element at a specific position.
+                 - When inserting at middle or beginning, elements shift right.
+
+        Example - [10,20,30,40] -Insert 15 at index 1 - [10,15,20,30,40]
+
+    4. Delete - O(n) 
+              - Deletion means removing an element.    
+              - Deleting requires shifting elements left.
+        Example - [10,20,30,40] - Delete 20 -[10,30,40]
+
+
+
+
+
+
